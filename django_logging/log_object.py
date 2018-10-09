@@ -39,6 +39,9 @@ class BaseLogObject(object):
             elif self.request.method == 'POST':
                 result['data'] = self.request.POST.dict()
 
+        if len(result['data']) == 0:
+            result['body'] = self.request.body.decode('utf-8')
+
         try:
             result['user'] = str(self.request.user)
         except AttributeError:
